@@ -6,13 +6,14 @@ const path = require('path');
 const PORT = process.env.PORT||4000
 const cors = require('cors')
 const basicRoutes = require('./routers/basic');
+const gameRoutes = require('./routers/gameRoutes');
 const ejs = require('ejs');
 const methodoverride = require('method-override');
 
 //for ejs templet
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views'));
-app.use(express.urlencoded({extended:true}));
+app.use(express.json({extended:true}));
 app.use(methodoverride('_method'))
 app.use(express.static(path.join(__dirname,'public')));
 
@@ -28,6 +29,7 @@ app.use(express.urlencoded({extended:true}));
 
 //routes
 app.use('/',basicRoutes)
+app.use('/game',gameRoutes)
 
 app.listen(PORT,()=>{
     console.log(`Listening on port ${PORT}`)
