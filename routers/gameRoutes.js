@@ -80,10 +80,14 @@ router.put('/:id',async(req,res)=>{
     if(game.box1==game.box5 && game.box5==game.box9){ if(game.box1=='0'){game.winner=changeCurrentTurn();game.isOver=true;if(game.winner==game.player1){game.w1=game.w1+1}else{game.w2=game.w2+1}} }
     if(game.box3==game.box5 && game.box5==game.box7){ if(game.box3=='0'){game.winner=changeCurrentTurn();game.isOver=true;if(game.winner==game.player1){game.w1=game.w1+1}else{game.w2=game.w2+1}} }
     let isAllFull=false;
-    if(game.box1!=" " && game.box2!=" " && game.box3!=" " && game.box4!=" " && game.box5!=" " && game.box6!=" " && game.box7!=" " && game.box8!=" " && game.box9!=" "){
+    if(game.box1!=" " && game.box2!=" " && game.box3!=" " && game.box4!=" " && game.box5!=" " && game.box6!=" " && game.box7!=" " && game.box8!=" " && game.box9!=" " ){
         isAllFull=true;
-        game.winner='NoBody'
-        game.draw=game.draw+1;
+       
+        if(game.winner==' '){
+            game.draw=game.draw+1;
+            game.winner='NoBody'
+        } 
+       
     }
     if(game.isOver || isAllFull){
         game.box1=" "
